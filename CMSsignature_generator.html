@@ -180,17 +180,21 @@
         ? `<p style="margin:0; font-size:16px; line-height:20px; font-weight:400; color:#000;"><a href="tel:${phone.replace(/[^0-9+]/g, '')}" style="color:#000; text-decoration:none;">${phone}</a></p>`
         : '';
 
-      const html = `
-<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Open Sans Condensed', Arial, Helvetica, sans-serif; color:#000; border-collapse:collapse;">
+const html = `
+<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Open Sans Condensed', Helvetica, Arial, sans-serif; color:#000; border-collapse:collapse; table-layout:fixed;">
   <tr>
-    <td style="padding-right:24px; vertical-align:middle;">
-      <img src="${logoUrl}" alt="Cornerstone Micropiling & Supply" style="display:block; width:200px; max-width:260px; height:auto; border:0; outline:none; text-decoration:none;">
+    <td width="200" style="width:200px; padding:0 20px 0 0; vertical-align:middle;">
+      <img src="${logoUrl}" alt="Cornerstone Micropiling & Supply" width="200" style="display:block; width:200px; height:auto; border:0; outline:none; text-decoration:none;">
     </td>
 
-    <td style="padding-left:24px; vertical-align:middle;">
-      <p style="margin:0; font-size:26px; line-height:30px; font-weight:700; letter-spacing:-0.3px; color:#000;">${name}</p>
+    <td width="2" style="width:2px; background:#1f6fff; font-size:0; line-height:0;">
+      &nbsp;
+    </td>
+
+    <td width="360" style="width:360px; padding:0 0 0 24px; vertical-align:middle; white-space:nowrap;">
+      <p style="margin:0 0 12px 0; font-size:26px; line-height:30px; font-weight:700; letter-spacing:-0.3px; color:#000;">${name}</p>
       ${titleRow}
-      <p style="margin:10px 0 0 0; font-size:16px; line-height:20px; font-weight:400; color:#000;">
+      <p style="margin:0; font-size:16px; line-height:20px; font-weight:400; color:#000;">
         <a href="mailto:${email}" style="color:#000; text-decoration:none;">${email}</a>
       </p>
       ${phoneRow}

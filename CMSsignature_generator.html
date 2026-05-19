@@ -22,7 +22,7 @@
       background: #fff;
       padding: 32px;
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
 
     h1 {
@@ -79,7 +79,7 @@
       border: 1px solid #ddd;
       border-radius: 12px;
       padding: 24px;
-      min-height: 220px;
+      min-height: 180px;
       background: #fff;
     }
 
@@ -111,10 +111,11 @@
     }
   </style>
 </head>
+
 <body>
   <div class="wrapper">
     <h1>CMS Email Signature Generator</h1>
-    <p>Fill in the fields, copy the signature preview, and paste it into Outlook or Gmail. The HTML code is also available below for advanced use.</p>
+    <p>Fill in the fields, copy the signature preview, and paste it into Outlook or Gmail.</p>
 
     <div class="layout">
       <div>
@@ -148,7 +149,7 @@
       1. Fill in the employee information.<br />
       2. Click “Update Signature.”<br />
       3. Click “Copy Signature.”<br />
-      4. Paste it into Outlook or Gmail signature settings.<br /><br />
+      4. Paste it into Outlook, Gmail, or Apple Mail signature settings.<br /><br />
       If copying does not preserve the layout, select the preview manually, copy it, and paste it into the email signature field.
     </div>
 
@@ -171,25 +172,31 @@
       const website = normalizeWebsite(websiteRaw);
       const phone = document.getElementById('phone').value.trim();
 
-      const titleRow = title ? `<div style="font-size:18px; line-height:24px; font-weight:400; color:#444; margin-top:4px;">${title}</div>` : '';
-      const phoneRow = phone ? `<div style="font-size:24px; line-height:30px; font-weight:400; color:#000;"><a href="tel:${phone.replace(/[^0-9+]/g, '')}" style="color:#000; text-decoration:none;">${phone}</a></div>` : '';
+      const titleRow = title
+        ? `<p style="margin:0 0 6px 0; font-size:15px; line-height:19px; font-weight:400; color:#444;">${title}</p>`
+        : '';
+
+      const phoneRow = phone
+        ? `<p style="margin:0; font-size:16px; line-height:20px; font-weight:400; color:#000;"><a href="tel:${phone.replace(/[^0-9+]/g, '')}" style="color:#000; text-decoration:none;">${phone}</a></p>`
+        : '';
 
       const html = `
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Open Sans Condensed', Arial, Helvetica, sans-serif; color:#000; border-collapse:collapse;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Open Sans Condensed', Arial, Helvetica, sans-serif; color:#000; border-collapse:collapse;">
   <tr>
-    <td style="padding-right:28px; vertical-align:middle;">
-      <img 
-src="${logoUrl}" 
-alt="Cornerstone Micropiling & Supply"
-style="display:block; width:260px; max-width:260px; height:auto; border:0; outline:none; text-decoration:none;"
->
+    <td style="padding-right:24px; vertical-align:middle;">
+      <img src="${logoUrl}" alt="Cornerstone Micropiling & Supply" style="display:block; width:260px; max-width:260px; height:auto; border:0; outline:none; text-decoration:none;">
     </td>
-    <td style="padding-left:26px; vertical-align:middle;">
-      <div style="font-size:30px; line-height:34px; font-weight:700; letter-spacing:-0.3px; color:#000;">${name}</div>
+
+    <td style="padding-left:24px; vertical-align:middle;">
+      <p style="margin:0; font-size:26px; line-height:30px; font-weight:700; letter-spacing:-0.3px; color:#000;">${name}</p>
       ${titleRow}
-      <div style="font-size:24px; line-height:30px; font-weight:400; color:#000; margin-top:18px;"><a href="mailto:${email}" style="color:#000; text-decoration:none;">${email}</a></div>
+      <p style="margin:10px 0 0 0; font-size:16px; line-height:20px; font-weight:400; color:#000;">
+        <a href="mailto:${email}" style="color:#000; text-decoration:none;">${email}</a>
+      </p>
       ${phoneRow}
-      <div style="font-size:24px; line-height:30px; font-weight:400; color:#000;"><a href="https://${website}" style="color:#000; text-decoration:none;">${website}</a></div>
+      <p style="margin:0; font-size:16px; line-height:20px; font-weight:400; color:#000;">
+        <a href="https://${website}" style="color:#000; text-decoration:none;">${website}</a>
+      </p>
     </td>
   </tr>
 </table>`.trim();
@@ -202,15 +209,16 @@ style="display:block; width:260px; max-width:260px; height:auto; border:0; outli
       const preview = document.getElementById('signaturePreview');
       const range = document.createRange();
       range.selectNodeContents(preview);
+
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
 
       try {
         document.execCommand('copy');
-        alert('Signature copied. Now paste it into Outlook or Gmail.');
+        alert('Signature copied. Now paste it into Outlook, Gmail, or Apple Mail.');
       } catch (err) {
-        alert('Copy failed. Select the preview manually, copy, and paste into Outlook or Gmail.');
+        alert('Copy failed. Select the preview manually, copy it, and paste it into your email signature field.');
       }
 
       selection.removeAllRanges();
